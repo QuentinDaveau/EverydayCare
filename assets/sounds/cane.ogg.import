@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cane.ogg-355ee46ddb7d6579c7f3786526c9ca61.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/cane.ogg"
+dest_files=[ "res://.import/cane.ogg-355ee46ddb7d6579c7f3786526c9ca61.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

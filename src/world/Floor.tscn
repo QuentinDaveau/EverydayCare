@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/other/floor.png" type="Texture" id=1]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 200, 200 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 1 )
+uv1_scale = Vector3( 100, 100, 1 )
+proximity_fade_enable = true
+proximity_fade_distance = 182.41
+distance_fade_mode = 1
+distance_fade_min_distance = 8.47
+distance_fade_max_distance = 14.97
+
+[node name="Floor" type="MeshInstance"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )

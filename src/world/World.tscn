@@ -1,0 +1,112 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://src/character/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/world/Floor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/world/Chair.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/other/Cane.png" type="Texture" id=4]
+[ext_resource path="res://src/world/Table.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/managers/save_manager/SaveManager.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/managers/time_manager/TimeManager.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/ui/UI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/world/Flower.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/managers/flower_manager/FlowerManager.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/sounds/intro.ogg" type="AudioStream" id=11]
+[ext_resource path="res://src/world/PhotoPanel.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/world/transit_screen.gd" type="Script" id=13]
+
+[sub_resource type="ProceduralSky" id=1]
+radiance_size = 3
+sky_top_color = Color( 0.85098, 0.972549, 0.843137, 1 )
+sky_horizon_color = Color( 0.85098, 0.972549, 0.843137, 1 )
+ground_bottom_color = Color( 0.835294, 0.933333, 0.847059, 1 )
+ground_horizon_color = Color( 0.85098, 0.972549, 0.843137, 1 )
+sun_longitude = -55.06
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+background_energy = 0.87
+fog_enabled = true
+fog_color = Color( 0.858824, 0.968627, 0.87451, 1 )
+fog_sun_color = Color( 0.87451, 0.956863, 0.870588, 1 )
+fog_depth_begin = 20.0
+fog_depth_end = 30.0
+fog_depth_curve = 0.329878
+ssao_enabled = true
+dof_blur_far_distance = 99.98
+dof_blur_far_transition = 0.1
+dof_blur_far_amount = 1.0
+dof_blur_far_quality = 2
+dof_blur_near_distance = 13.46
+
+[node name="World" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Character" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.572, 0.033 )
+_cane_path = NodePath("../Cane")
+
+[node name="Floor" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.37682 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.979938, -0.0439782, -0.194389, 0.0754828, -0.820796, 0.566212, -0.184455, -0.569526, -0.80101, 9.45676, 2.52556, -1.27693 )
+light_energy = 2.89
+shadow_enabled = true
+shadow_bias = -0.4
+directional_shadow_split_3 = 0.3
+directional_shadow_normal_bias = 1.97
+directional_shadow_bias_split_scale = 0.15
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.93658, 0.350453, 0, -0.350453, 0.93658, 8.20733, 6.06733, 14.3734 )
+fov = 51.5
+
+[node name="Chair" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57938, 0 )
+
+[node name="Cane" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.34152, 0.689759, 0.00278491 )
+pixel_size = 0.1
+shaded = true
+alpha_cut = 2
+texture = ExtResource( 4 )
+
+[node name="Table" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9109, 1.58045, 0 )
+
+[node name="UI" parent="." instance=ExtResource( 8 )]
+
+[node name="PhotoPanel" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 0.972443, 0.23314, 0, -0.23314, 0.972443, 8.36031, 3.00002, 0.34299 )
+
+[node name="FlowerManager" parent="." instance=ExtResource( 10 )]
+_flower_path = NodePath("../Flower")
+
+[node name="TimeManager" parent="." instance=ExtResource( 7 )]
+_ui_path = NodePath("../UI")
+
+[node name="SaveManager" parent="." instance=ExtResource( 6 )]
+_time_manager_path = NodePath("../TimeManager")
+
+[node name="Flower" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9499, 1.96855, -0.0129114 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -5.0
+autoplay = true
+
+[node name="TransitScreen" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.0941176, 0.0980392, 0.0941176, 1 )
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="TransitScreen"]

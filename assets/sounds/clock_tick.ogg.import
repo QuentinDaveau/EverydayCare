@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/clock_tick.ogg-9a1210e8162334c093b2054672be0cd4.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/clock_tick.ogg"
+dest_files=[ "res://.import/clock_tick.ogg-9a1210e8162334c093b2054672be0cd4.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
